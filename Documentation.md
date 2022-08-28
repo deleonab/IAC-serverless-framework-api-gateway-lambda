@@ -15,3 +15,10 @@ aws configure
 npm install -g serverless
 ```
 
+### create a new serverless project
+```
+serverless
+```
+```
+What do you want to make? AWS - Node.Js - HTTP API
+```
