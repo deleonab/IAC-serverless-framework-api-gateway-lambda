@@ -8,4 +8,10 @@ aws configure
 ```
 ### Enter your access key ID and secret key ID when prompted
 
+### Configured successfully
+### Install serveless framwork
+
+```
+npm install -g serverless
+```
 
