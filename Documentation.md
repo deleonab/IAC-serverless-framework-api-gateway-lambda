@@ -6,4 +6,6 @@
 ```
 aws configure
 ```
-### Enter your access key ID and secret key ID
+### Enter your access key ID and secret key ID when prompted
+
+
