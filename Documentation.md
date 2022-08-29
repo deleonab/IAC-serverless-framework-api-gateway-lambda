@@ -217,3 +217,24 @@ serverless deploy -v
 
 ### We would need a database ans will be using AWS NoSQL database DynamoDB for our backend
 
+### We shall add the code necessary to spin up the database to serverless.yaml
+
+```
+resources:
+  - Resources:
+      TodoTable:
+         Type: AWS::DynamoDB::Table
+         Properties: 
+           TableName:TodoTable
+           BillingMode: PAY_PER_REQUEST
+           AttributeDefinitions:
+             - AttributeName: id
+             - AttributeType: S
+           KeySchema: 
+             - AttributeName: id
+             
+               
+
+
+
+
