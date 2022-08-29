@@ -43,7 +43,7 @@ module.exports.hello = async (event) => {
 };
 ```
 ## .
-## severless.yml
+### severless.yml
 ```
 service: aws-node-http-api-project
 frameworkVersion: '3'
@@ -126,4 +126,24 @@ module.exports = {
 ### I will also rename handler.js to hello.js 
 ```
  mv aws-node-http-api-project/src/handler.js aws-node-http-api-project/src/hello.js
+
+```
+ ### In the serverless.yml file, change handler: handler.hello   handler: src/hello.handler as below
+
+### severless.yml
+```
+service: aws-node-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  hello:
+    handler: src/hello.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
 ```
