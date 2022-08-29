@@ -264,3 +264,9 @@ npm install uuid aws-sdk
 - id
 - todo
 - CreatedAt
+
+### We only need the todo from the user. id and created At will be generated.
+```
+const { todo } = JSON.parse(event.body)
+```
+
