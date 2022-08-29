@@ -208,3 +208,9 @@ serverless deploy -v
   }
 }
 ```
+
+### Now let's start creating the todo functions
+- addTodo
+- fetchTod
+- fetchTodos
+- updateTodo
