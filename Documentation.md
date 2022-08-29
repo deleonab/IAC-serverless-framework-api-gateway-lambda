@@ -209,8 +209,11 @@ serverless deploy -v
 }
 ```
 
-### Now let's start creating the todo functions
+### Now let's start creating the todo lambda functions
 - addTodo
 - fetchTod
 - fetchTodos
 - updateTodo
+
+### We would need a database ans will be using AWS NoSQL database DynamoDB for our backend
+
