@@ -14,5 +14,5 @@ const hello = async (event) => {
   };
 };
 module.exports = {
-  handler:handler.hello
+  handler:hello
 }
