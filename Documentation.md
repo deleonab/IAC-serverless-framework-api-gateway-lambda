@@ -147,3 +147,64 @@ functions:
           path: /
           method: get
 ```
+
+### I will deploy to make sure nothing is broken
+
+```
+serverless deploy -v
+```
+
+### Visiting the gateway endpoint in the browser
+
+```
+
+{
+  "message": "Go Serverless v3.0! Your function executed successfully!",
+  "input": {
+    "version": "2.0",
+    "routeKey": "GET /",
+    "rawPath": "/",
+    "rawQueryString": "",
+    "headers": {
+      "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
+      "accept-encoding": "gzip, deflate, br",
+      "accept-language": "en-GB,en-US;q=0.9,en;q=0.8",
+      "cache-control": "max-age=0",
+      "content-length": "0",
+      "host": "cp6agsj0s6.execute-api.us-east-1.amazonaws.com",
+      "sec-ch-ua": "\"Chromium\";v=\"104\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"104\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "sec-fetch-dest": "document",
+      "sec-fetch-mode": "navigate",
+      "sec-fetch-site": "cross-site",
+      "sec-fetch-user": "?1",
+      "upgrade-insecure-requests": "1",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36",
+      "x-amzn-trace-id": "Root=1-630d228d-2280faab11ba32761a8dd846",
+      "x-forwarded-for": "90.222.128.88",
+      "x-forwarded-port": "443",
+      "x-forwarded-proto": "https"
+    },
+    "requestContext": {
+      "accountId": "185439933271",
+      "apiId": "cp6agsj0s6",
+      "domainName": "cp6agsj0s6.execute-api.us-east-1.amazonaws.com",
+      "domainPrefix": "cp6agsj0s6",
+      "http": {
+        "method": "GET",
+        "path": "/",
+        "protocol": "HTTP/1.1",
+        "sourceIp": "90.222.128.88",
+        "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36"
+      },
+      "requestId": "XpJWNibboAMEPkA=",
+      "routeKey": "GET /",
+      "stage": "$default",
+      "time": "29/Aug/2022:20:33:17 +0000",
+      "timeEpoch": 1661805197960
+    },
+    "isBase64Encoded": false
+  }
+}
+```
