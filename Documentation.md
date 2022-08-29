@@ -253,6 +253,14 @@ resources:
 
 
 ```
+### Next we need to install some packages that we shall be using - uuid and aws-sdk
+```
+npm install uuid aws-sdk
+```
 
 
-
+### Let's create the addTodo function. We shall rename hello.js to addTodo.js
+### 3 items will be sent to the database through event.body
+- id
+- todo
+- CreatedAt
