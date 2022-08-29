@@ -69,3 +69,16 @@ serverless deploy
 ```
 
 ### Lambda function and API Gateway deployed and viewed in console
+
+### Endpoint generated in console
+API endpoint: https://cp6agsj0s6.execute-api.us-east-1.amazonaws.com/
+
+### Let's refactor our code by creating a folder src to hold all the functions
+
+```
+mkdir src
+```
+```
+mv handler.js src/handler.js
+```
+### handler.js successfully moved to src folder
