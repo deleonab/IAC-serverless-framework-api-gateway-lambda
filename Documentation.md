@@ -268,6 +268,7 @@ npm install uuid aws-sdk
 ### We only need the todo from the user. id and created At will be generated.
 ### First we must require the uuid to be able to generate the id
 ```
+const { v4 } = require("uuid");
 const { todo } = JSON.parse(event.body);
 
 const createdAt = new Date();
