@@ -22,3 +22,41 @@ serverless
 ```
 What do you want to make? AWS - Node.Js - HTTP API
 ```
+### This creates a handler.js file and a serverless.yml file in our directory
+## handler.js
+
+```
+"use strict";
+
+module.exports.hello = async (event) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify(
+      {
+        message: "Go Serverless v3.0! Your function executed successfully!",
+        input: event,
+      },
+      null,
+      2
+    ),
+  };
+};
+```
+## .
+## severless.yml
+```
+service: aws-node-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - httpApi:
+          path: /
+          method: get
+```
