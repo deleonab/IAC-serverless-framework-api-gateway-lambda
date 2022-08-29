@@ -60,3 +60,12 @@ functions:
           path: /
           method: get
 ```
+
+### I added a region us-west-2
+
+### deploy to the cloud - Our AWS account
+```
+serverless deploy 
+```
+
+### Lambda function and API Gateway deployed and viewed in console
