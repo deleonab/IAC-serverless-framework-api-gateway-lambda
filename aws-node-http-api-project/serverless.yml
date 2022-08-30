@@ -5,7 +5,12 @@ provider:
   name: aws
   runtime: nodejs14.x
   region: us-east-1
-
+  iamRoleStatements: 
+  - Effect: Allow
+    Action:
+      - dynamodb: *
+    Resources: 
+      - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
 functions:
   addTodo:
     handler: src/addTodo.handler
