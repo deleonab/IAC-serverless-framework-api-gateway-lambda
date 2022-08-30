@@ -276,7 +276,25 @@ const createdAt = new Date();
 const id = v4();
 ```
 
-### To save to the database, we need to use the aws-sdk by requiring it. This will give us access to DynamoDB
+### To save to the database, we need to use the aws-sdk by requiring it. 
 ```
 const AWS = require("aws-sdk");
+```
+### This will give us access to DynamoDB
+```
+const dynamodb = AWS.DynamoDB.DocumentClient();
+```
+### Now we could put into the database
+```
+const newTodo = {
+  id,
+  todo,
+  createdAt
+  completed: false
+}
+dynamodb.put({
+   TableNate:TodoTable,
+   Item: {newTodo}
+
+})
 ```
