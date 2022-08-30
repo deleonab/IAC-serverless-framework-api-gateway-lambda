@@ -284,7 +284,7 @@ const AWS = require("aws-sdk");
 ```
 const dynamodb = AWS.DynamoDB.DocumentClient();
 ```
-### Now we could put into the database
+### Now we could put into the database by creating object newTodo
 ```
 const newTodo = {
   id,
