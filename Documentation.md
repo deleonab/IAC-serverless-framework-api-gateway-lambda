@@ -292,7 +292,7 @@ const newTodo = {
   createdAt
   completed: false
 }
-dynamodb.put({
+await dynamodb.put({
    TableNate:TodoTable,
    Item: {newTodo}
 
