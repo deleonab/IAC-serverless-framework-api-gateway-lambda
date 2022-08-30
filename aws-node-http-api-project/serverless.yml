@@ -7,8 +7,8 @@ provider:
   region: us-east-1
 
 functions:
-  hello:
-    handler: src/hello.handler
+  addTodo:
+    handler: src/addTodo.handler
     events:
       - httpApi:
           path: /
