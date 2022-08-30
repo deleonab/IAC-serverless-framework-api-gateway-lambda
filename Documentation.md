@@ -276,7 +276,7 @@ const createdAt = new Date();
 const id = v4();
 ```
 
-### To save to the database, we need to use the aws-sdk by requiring it
+### To save to the database, we need to use the aws-sdk by requiring it. This will give us access to DynamoDB
 ```
 const AWS = require("aws-sdk");
 ```
