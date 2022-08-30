@@ -366,3 +366,8 @@ resources:
             KeyType: HASH
 
 ```
+
+### We will now give our functions permission to put things into our DynamoDB table
+
+### We can do this from serverless.yml in the provider section
+
