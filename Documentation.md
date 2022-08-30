@@ -369,5 +369,13 @@ resources:
 
 ### We will now give our functions permission to put things into our DynamoDB table
 
-### We can do this from serverless.yml in the provider section
+### We can do this from serverless.yml in the provider section using iamRoleStatements and pointing to the arn
+```
+iamRoleStatements: 
+  - Effect: Allow
+  Action:
+    - dynamodb: *
+  Resources: 
+   - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
+```
 
