@@ -8,8 +8,8 @@ provider:
   iamRoleStatements: 
   - Effect: Allow
     Action:
-      - dynamodb: *
-    Resources: 
+      - dynamodb:*
+    Resource: 
       - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
 functions:
   addTodo:
@@ -17,7 +17,7 @@ functions:
     events:
       - httpApi:
           path: /
-          method: get
+          method: post
 resources:
   Resources:
     TodoTable:

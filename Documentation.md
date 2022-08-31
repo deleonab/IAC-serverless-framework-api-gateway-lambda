@@ -375,7 +375,13 @@ iamRoleStatements:
   - Effect: Allow
   Action:
     - dynamodb: *
-  Resources: 
+  Resource: 
    - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
 ```
+
+### We need to change the method in serverless.yml from GET to POST
+```
+method: post
+```
+### Next we need to set up the fetchTodod function
 
