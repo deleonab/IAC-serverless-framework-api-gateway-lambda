@@ -3,8 +3,9 @@ const { v4 } = require("uuid");
 const AWS = require("aws-sdk");
 
 const addTodo = async (event) => {
-  const dynamodb = AWS.DynamoDB.DocumentClient();
-  const { todo } = JSON.parse(event.body);
+  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  const { todo } = "helloooo";
+  const { todo22 } = JSON.parse(event.body);
   const createdAt = new Date();
   const id = v4();
   console.log("This is an ID",id);
