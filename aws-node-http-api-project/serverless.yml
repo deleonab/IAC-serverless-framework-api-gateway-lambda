@@ -16,8 +16,14 @@ functions:
     handler: src/addTodo.handler
     events:
       - httpApi:
-          path: /
+          path: /add
           method: post
+  fetchTodos:
+    handler: src/fetchTodos.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: get
 resources:
   Resources:
     TodoTable:

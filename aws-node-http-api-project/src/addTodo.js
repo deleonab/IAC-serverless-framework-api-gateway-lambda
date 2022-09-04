@@ -4,10 +4,10 @@ const AWS = require("aws-sdk");
 
 const addTodo = async (event) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient();
-    const {todo} = JSON.parse(event.body);
+    const todo = "This is the 1st todo";
   const createdAt = new Date();
   const id = v4();
-  console.log("This is an ID",id);
+  
   const newTodo = {
     id,
     todo,
@@ -16,10 +16,9 @@ const addTodo = async (event) => {
   }
 
   await dynamodb.put({
-    TableName: TodoTable,
-    Item: {newTodo}
- 
- })
+    TableName: "TodoTable",
+    Item: newTodo
+  }).promise()
 
   return {
     statusCode: 200,
@@ -27,5 +26,5 @@ const addTodo = async (event) => {
   };
 };
 module.exports = {
-  handler:addTodo
+  handler: addTodo
 }
