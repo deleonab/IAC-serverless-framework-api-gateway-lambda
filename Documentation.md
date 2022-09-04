@@ -217,3 +217,48 @@ serverless deploy -v
 ### Create a new request(add request) and call it Hello
 
 ![postmansuccess1](./images/postman1.JPG)
+
+### Now let's start creating the todo lambda functions
+- addTodo
+- fetchTod
+- fetchTodos
+- updateTodo
+
+### We would need a database ans will be using AWS NoSQL database DynamoDB for our backend
+
+### We shall add the code necessary to spin up the database to serverless.yaml
+
+This code will create the dynamoDB table using cloudformation
+
+```
+service: aws-node-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+functions:
+  hello:
+    handler: src/hello.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+resources:
+  Resources:
+    TodoTable:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: TodoTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: id
+            KeyType: HASH
+
+
+```
