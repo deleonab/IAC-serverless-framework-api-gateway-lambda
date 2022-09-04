@@ -441,4 +441,169 @@ sls
 ![postmansuccess1](./images/postmansuccess1.JPG)
 
 ### I will now create the fetchTodo function by mofifying a copy of the addTodo.js function
+```
+const { v4 } = require("uuid");
+const AWS = require("aws-sdk");
 
+const fetchTodos = async (event) => {
+  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  
+let todos;
+
+  try {
+    const results = await dynamodb.scan({TableName: "TodoTable"}).promise()
+    todos = results.items
+  } catch (error) {
+    console.log(error)
+  }
+
+
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(todos),
+  };
+};
+
+module.exports = {
+  handler: fetchTodos
+}
+```
+### Here is the fetch todo function to retun a single record based on the parameter passed i.e id
+
+```
+const { v4 } = require("uuid");
+const AWS = require("aws-sdk");
+
+const fetchTodo = async (event) => {
+  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  const { id } = event.pathParameters
+
+let todo;
+
+  try {
+    const result = await dynamodb.get({
+        TableName: "TodoTable", 
+        Key: { id }
+    }).promise()
+    todo = result.items
+  } catch (error) {
+    console.log(error)
+  }
+
+
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(todo),
+  };
+};
+
+module.exports = {
+  handler: fetchTodo
+}
+```
+
+### Next isthe Update todo function  updateTodo.js
+
+```
+const { v4 } = require("uuid");
+const AWS = require("aws-sdk");
+
+const updateTodo = async (event) => {
+  const dynamodb = new AWS.DynamoDB.DocumentClient();
+  const { completed } = JSON.parse(event.body);
+  const { id } = event.pathParameters
+let todo;
+
+  
+await dynamodb.update({
+        TableName: "TodoTable" ,
+        Key: { id },
+        UpdateExpression: 'set completed = :completed',
+        ExpressionAttributeValues: {
+            ':completed' : completed
+        },
+        ReturnValues: "ALL_NEW"
+}).promise()
+    
+  
+return {
+    statusCode: 200,
+    body: JSON.stringify({
+
+        msg: "Todo Updated"
+    }),
+  };
+};
+
+module.exports = {
+  handler: updateTodo
+}
+```
+
+### The updated serverless.yml file now contains all the routes a s seen below
+
+```
+service: aws-node-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+  iamRoleStatements: 
+  - Effect: Allow
+    Action:
+      - dynamodb:*
+    Resource: 
+      - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
+
+
+functions:
+  addTodo:
+    handler: src/addTodo.handler
+    events:
+      - httpApi:
+          path: /
+          method: post
+
+  fetchTodos:
+    handler: src/fetchTodos.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: get
+
+
+  fetchTodo:
+    handler: src/fetchTodo.handler
+    events:
+      - httpApi:
+          path: /todo/{id}
+          method: get   
+
+  updateTodo:
+    handler: src/updateTodo.handler
+    events:
+      - httpApi:
+          path: /todo/{id}
+          method: put
+
+resources:
+  Resources:
+    TodoTable:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: TodoTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: id
+            KeyType: HASH
+
+
+
+```

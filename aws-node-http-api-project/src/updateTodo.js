@@ -2,7 +2,7 @@
 const { v4 } = require("uuid");
 const AWS = require("aws-sdk");
 
-const fetchTodos = async (event) => {
+const updateTodo = async (event) => {
   const dynamodb = new AWS.DynamoDB.DocumentClient();
   const { completed } = JSON.parse(event.body);
   const { id } = event.pathParameters
@@ -30,5 +30,5 @@ return {
 };
 
 module.exports = {
-  handler: fetchTodos
+  handler: updateTodo
 }
