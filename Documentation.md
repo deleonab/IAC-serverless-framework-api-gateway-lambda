@@ -262,3 +262,181 @@ resources:
 
 
 ```
+
+### I will run the code again
+```
+sls
+```
+
+### Next I will check the console to see if our dynamoDB table (TodoTable) was created.
+
+![DynamoDB TodoTable](./images/todotable.JPG)
+
+
+
+
+
+
+```
+### Next we need to install some packages that we shall be using - uuid and aws-sdk
+```
+npm init
+npm install uuid aws-sdk
+```
+
+### Let's create the addTodo function. We shall rename hello.js to addTodo.js
+### 3 items will be sent to the database through event.body
+- id
+- todo
+- CreatedAt
+
+### We only need the todo from the user. id and created At will be generated.
+### First we must require the uuid to be able to generate the id
+```
+const { v4 } = require("uuid");
+const { todo } = JSON.parse(event.body);
+
+const createdAt = new Date();
+
+const id = v4();
+```
+
+### To save to the database, we need to use the aws-sdk by requiring it. 
+```
+const AWS = require("aws-sdk");
+```
+### This will give us access to DynamoDB
+```
+const dynamodb = AWS.DynamoDB.DocumentClient();
+```
+### Now we could put into the database by creating object newTodo
+```
+const newTodo = {
+  id,
+  todo,
+  createdAt,
+  completed: false
+}
+await dynamodb.put({
+   TableNate:TodoTable,
+   Item: {newTodo}
+
+})
+```
+
+### addTodo.js will now look like this 
+```
+"use strict";
+const { v4 } = require("uuid");
+const AWS = require("aws-sdk");
+
+const addTodo = async (event) => {
+  const dynamodb = AWS.DynamoDB.DocumentClient();
+  const { todo } = JSON.parse(event.body);
+  const createdAt = new Date();
+  const id = v4();
+  console.log("This is an ID",id);
+  const newTodo = {
+    id,
+    todo,
+    createdAt,
+    completed: false
+  }
+
+  await dynamodb.put({
+    TableName: TodoTable,
+    Item: {newTodo}
+ 
+ })
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify(newTodo),
+  };
+};
+module.exports = {
+  handler:addTodo
+}
+```
+
+### serveless.yml will now look like this
+```
+service: aws-node-http-api-project
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: us-east-1
+
+functions:
+  addTodo:
+    handler: src/addTodo.handler
+    events:
+      - httpApi:
+          path: /
+          method: get
+resources:
+  Resources:
+    TodoTable:
+      Type: AWS::DynamoDB::Table
+      Properties: 
+        TableName: TodoTable
+        BillingMode: PAY_PER_REQUEST
+        AttributeDefinitions:
+          - AttributeName: id
+            AttributeType: S
+        KeySchema: 
+          - AttributeName: id
+            KeyType: HASH
+
+```
+
+### We will now give our functions permission to put things into our DynamoDB table
+
+### We can do this from serverless.yml in the provider section using iamRoleStatements and pointing to the arn
+```
+iamRoleStatements: 
+  - Effect: Allow
+  Action:
+    - dynamodb: *
+  Resource: 
+   - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
+```
+
+
+### We need to change the method in serverless.yml from GET to POST
+```
+method: post
+
+### I will run sls and then test new endpoint in postman
+```
+sls
+```
+### In postman, I will create a new request named addTodo as a post request. 
+### In the body tab, I selected raw and the JSON.
+### I entered this code in the body
+
+```
+{
+   "todo": "Make a youtube video"
+}
+
+```
+## error encountered in postman post request - Internal server error. 
+
+![postman error 2](./images/postmanerror1.JPG)
+
+### I checked cloudwatch logs and saw error below
+
+![Cloudwatch error](./images/cloudwatcherror1.JPG)
+
+
+The error was solved by instantiating DynamoDB with the new keyword
+
+```
+ const dynamodb = new AWS.DynamoDB.DocumentClient();
+```
+
+![postmansuccess1](./images/postmansuccess1.JPG)
+
