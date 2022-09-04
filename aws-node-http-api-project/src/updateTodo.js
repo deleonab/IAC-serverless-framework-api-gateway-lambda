@@ -8,24 +8,19 @@ const fetchTodos = async (event) => {
   const { id } = event.pathParameters
 let todo;
 
-  try {
-    await dynamodb.update({
+  
+await dynamodb.update({
         TableName: "TodoTable" ,
         Key: { id },
         UpdateExpression: 'set completed = :completed',
         ExpressionAttributeValues: {
             ':completed' : completed
-
-        }
+        },
+        ReturnValues: "ALL_NEW"
 }).promise()
-    todos = SpeechRecognitionResultList.items
-  } catch (error) {
-    console.log(error)
-  }
-
-
-
-  return {
+    
+  
+return {
     statusCode: 200,
     body: JSON.stringify(todos),
   };
