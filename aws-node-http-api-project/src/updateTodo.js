@@ -22,7 +22,10 @@ await dynamodb.update({
   
 return {
     statusCode: 200,
-    body: JSON.stringify(todos),
+    body: JSON.stringify({
+
+        msg: "Todo Updated"
+    }),
   };
 };
 
