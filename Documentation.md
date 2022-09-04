@@ -408,7 +408,7 @@ iamRoleStatements:
 ### We need to change the method in serverless.yml from GET to POST
 ```
 method: post
-
+```
 ### I will run sls and then test new endpoint in postman
 ```
 sls
@@ -432,7 +432,7 @@ sls
 ![Cloudwatch error](./images/cloudwatcherror1.JPG)
 
 
-The error was solved by instantiating DynamoDB with the new keyword
+### The error was solved by instantiating DynamoDB with the new keyword
 
 ```
  const dynamodb = new AWS.DynamoDB.DocumentClient();
