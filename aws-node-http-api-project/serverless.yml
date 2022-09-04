@@ -21,7 +21,20 @@ functions:
           path: /
           method: post
 
+  fetchTodos:
+    handler: src/fetchTodos.handler
+    events:
+      - httpApi:
+          path: /todos
+          method: get
 
+
+  fetchTodo:
+    handler: src/fetchTodo.handler
+    events:
+      - httpApi:
+          path: /todo/{id}
+          method: get        
 resources:
   Resources:
     TodoTable:

@@ -440,3 +440,5 @@ sls
 
 ![postmansuccess1](./images/postmansuccess1.JPG)
 
+### I will now create the fetchTodo function by mofifying a copy of the addTodo.js function
+
