@@ -11,19 +11,7 @@ provider:
       - dynamodb:*
     Resource: 
       - arn:aws:dynamodb:us-east-1:185439933271:table/TodoTable
-functions:
-  addTodo:
-    handler: src/addTodo.handler
-    events:
-      - httpApi:
-          path: /add
-          method: post
-  fetchTodos:
-    handler: src/fetchTodos.handler
-    events:
-      - httpApi:
-          path: /todos
-          method: get
+
 resources:
   Resources:
     TodoTable:
